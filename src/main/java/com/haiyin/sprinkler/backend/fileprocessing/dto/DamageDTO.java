@@ -10,10 +10,11 @@ import java.time.LocalDate;
 public class DamageDTO {
     private LocalDate damageDate;
     private String headSerial;
-    private String history;
+    private String headHistory;
     private String note;
     private String damageType;
     private String realType;
+
 
     public LocalDate getDamageDate() {
         return this.damageDate;
@@ -23,8 +24,8 @@ public class DamageDTO {
         return this.headSerial;
     }
 
-    public String getHistory() {
-        return this.history;
+    public String getHeadHistory() {
+        return this.headHistory;
     }
 
     public String getNote() {
@@ -47,8 +48,8 @@ public class DamageDTO {
         this.headSerial = headSerial;
     }
 
-    public void setHistory(String history) {
-        this.history = history;
+    public void setHeadHistory(String headHistory) {
+        this.headHistory = headHistory;
     }
 
     public void setNote(String note) {
@@ -76,9 +77,10 @@ public class DamageDTO {
         final Object other$headSerial = other.getHeadSerial();
         if (this$headSerial == null ? other$headSerial != null : !this$headSerial.equals(other$headSerial))
             return false;
-        final Object this$history = this.getHistory();
-        final Object other$history = other.getHistory();
-        if (this$history == null ? other$history != null : !this$history.equals(other$history)) return false;
+        final Object this$headHistory = this.getHeadHistory();
+        final Object other$headHistory = other.getHeadHistory();
+        if (this$headHistory == null ? other$headHistory != null : !this$headHistory.equals(other$headHistory))
+            return false;
         final Object this$note = this.getNote();
         final Object other$note = other.getNote();
         if (this$note == null ? other$note != null : !this$note.equals(other$note)) return false;
@@ -103,8 +105,8 @@ public class DamageDTO {
         result = result * PRIME + ($damageDate == null ? 43 : $damageDate.hashCode());
         final Object $headSerial = this.getHeadSerial();
         result = result * PRIME + ($headSerial == null ? 43 : $headSerial.hashCode());
-        final Object $history = this.getHistory();
-        result = result * PRIME + ($history == null ? 43 : $history.hashCode());
+        final Object $headHistory = this.getHeadHistory();
+        result = result * PRIME + ($headHistory == null ? 43 : $headHistory.hashCode());
         final Object $note = this.getNote();
         result = result * PRIME + ($note == null ? 43 : $note.hashCode());
         final Object $damageType = this.getDamageType();
@@ -115,6 +117,6 @@ public class DamageDTO {
     }
 
     public String toString() {
-        return "DamageDTO(damageDate=" + this.getDamageDate() + ", headSerial=" + this.getHeadSerial() + ", history=" + this.getHistory() + ", note=" + this.getNote() + ", damageType=" + this.getDamageType() + ", realType=" + this.getRealType() + ")";
+        return "DamageDTO(damageDate=" + this.getDamageDate() + ", headSerial=" + this.getHeadSerial() + ", headHistory=" + this.getHeadHistory() + ", note=" + this.getNote() + ", damageType=" + this.getDamageType() + ", realType=" + this.getRealType() + ")";
     }
 }

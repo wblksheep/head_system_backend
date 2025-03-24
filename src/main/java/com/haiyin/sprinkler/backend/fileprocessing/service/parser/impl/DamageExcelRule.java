@@ -50,7 +50,7 @@ public class DamageExcelRule implements ExcelParseRule<DamageDTO> {
                 matcher_start = matcher.end();
             }
 
-            dto.setHistory(row.getCell(3).getStringCellValue());
+            dto.setHeadHistory(row.getCell(3).getStringCellValue());
 
             dto.setNote(row.getCell(4).getStringCellValue());
 

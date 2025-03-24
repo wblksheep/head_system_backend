@@ -7,6 +7,7 @@ import com.haiyin.sprinkler.backend.fileprocessing.dto.AllocateDTO;
 import com.haiyin.sprinkler.backend.fileprocessing.dto.DamageDTO;
 import com.haiyin.sprinkler.backend.fileprocessing.dto.ImportDTO;
 import com.haiyin.sprinkler.backend.fileprocessing.dto.MaintainDTO;
+import com.haiyin.sprinkler.backend.fileprocessing.dto.RmaDTO;
 import com.haiyin.sprinkler.backend.fileprocessing.service.FileProcessorService;
 import com.haiyin.sprinkler.backend.fileprocessing.service.StateMachine;
 import com.haiyin.sprinkler.backend.fileprocessing.service.converter.DAOConverter;
@@ -57,11 +58,27 @@ public class FileProcessorServiceImpl implements FileProcessorService {
                     validateFileCount(files, 1,type.name());
                     return handleDamage(files[0]);
                 }
+                case RMA ->{
+                    validateFileCount(files, 1,type.name());
+                    return handleRMA(files[0]);
+                }
                 default -> throw new IllegalArgumentException("Unsupported scene type");
             }
         } catch (IOException e) {
             throw new FileProcessingException("IO error", sceneType, Arrays.toString(files));
         }
+    }
+
+    private List<?> handleRMA(MultipartFile file) throws IOException {
+        String sceneType = SceneType.RMA.name();
+        List<RmaDTO> dtos = excelParser.parseByStream(file, sceneType);
+        // 2. 并行流加速转换
+        List<SprinklerDAO> daos = dtos.parallelStream()
+                .map(dto -> (SprinklerDAO) daoConverter.parseByStream(sceneType).convert(dto))
+                .toList();
+        List<Long> daoIds = sprinklerSaver.batchUpsert(daos, sceneType);
+        stateMachine.batchRequestTransition(daoIds, 4);
+        return dtos;
     }
 
     private List<?> handleDamage(MultipartFile file) throws IOException {

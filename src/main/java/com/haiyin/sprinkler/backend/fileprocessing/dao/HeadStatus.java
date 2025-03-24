@@ -5,7 +5,7 @@ public enum HeadStatus {
     IN_USE(1, "使用中"),
     UNDER_MAINTENANCE(2, "维修中"),
     DAMAGED(3, "破损"),
-    RMA(4, "RMA流程");
+    RMA(4, "RMA");
 
     private final int code;
     private final String desc;
