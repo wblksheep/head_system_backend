@@ -19,7 +19,7 @@ public class RmaConverterRule implements DAOConverterRule<RmaDTO, SprinklerDAO> 
         s.setDamageDate(dto.getDamageDate());
         s.setRmaDate(dto.getRmaDate());
         s.setCustomer(dto.getCustomer());
-        s.setHeadHistory(dto.getHeadSerial());
+        s.setHeadHistory(dto.getHeadHistory());
         s.setRmaLocation(dto.getRmaLocation());
         s.setStatus(HeadStatus.UNDER_MAINTENANCE);
         s.setVersion(0);
