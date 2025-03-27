@@ -8,10 +8,11 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RmaDTO {
+    private String rmaDate;//做RMA日期
     private String headSerial;//喷头序列号，唯一
     private String realType;//返修原因，和DamageDTO共用字段
     private LocalDate damageDate;//返仓日期，DamageDTO共用字段
-    private LocalDate rmaDate;//做RMA日期
+
     private String customer;//返修客户
     private String headHistory;//喷头历史
     private String rmaLocation;//RMA地点

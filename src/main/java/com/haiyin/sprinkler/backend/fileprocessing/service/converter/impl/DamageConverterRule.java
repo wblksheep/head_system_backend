@@ -16,7 +16,7 @@ public class DamageConverterRule implements DAOConverterRule<DamageDTO, Sprinkle
         SprinklerDAO s = new SprinklerDAO();
         s.setDamageDate(dto.getDamageDate());
         s.setHeadSerial(dto.getHeadSerial());
-        s.setHeadHistory(dto.getHeadSerial());
+        s.setHeadHistory(dto.getHeadHistory());
         s.setNote(dto.getNote());
         s.setDamageType(dto.getDamageType());
         s.setRealType(dto.getRealType());

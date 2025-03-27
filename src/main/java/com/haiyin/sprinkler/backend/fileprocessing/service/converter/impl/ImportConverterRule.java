@@ -14,14 +14,10 @@ public class ImportConverterRule implements DAOConverterRule<ImportDTO, Sprinkle
     @Override
     public SprinklerDAO convert(ImportDTO dto) {
         SprinklerDAO s = new SprinklerDAO();
-        s.setShippingDate(dto.getShippingDate());
-        s.setPurchaseDate(dto.getPurchaseDate());
-        s.setContractNumber(dto.getContractNumber());
+        s.setPurchaseDateContrast(dto.getPurchasDateContrast());
         s.setHeadModel(dto.getHeadModel());
         s.setHeadSerial(dto.getHeadSerial());
         s.setWarehouseDate(dto.getWarehouseDate());
-        s.setVoltage(dto.getVoltage());
-        s.setJetsout(dto.getJetsout());
         s.setStatus(HeadStatus.IN_STOCK);
         s.setVersion(0);
         return s;

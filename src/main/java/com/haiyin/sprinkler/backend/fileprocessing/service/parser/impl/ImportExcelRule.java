@@ -28,38 +28,47 @@ public class ImportExcelRule implements ExcelParseRule<ImportDTO> {
     public List<ImportDTO> parse(InputStream stream) throws IOException {
         // 使用POI解析为导入DTO
         Workbook workbook = new XSSFWorkbook(stream);
-        XSSFSheet sheet = (XSSFSheet) workbook.getSheetAt(0);
         List<ImportDTO> list = new ArrayList<>();
-        for (Row row : sheet) {
-            if (row.getRowNum() == 0) continue; // 跳过标题行
+        for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
+            XSSFSheet sheet = (XSSFSheet) workbook.getSheetAt(i);
+            for (int j =0; j < sheet.getLastRowNum(); j++) {
+                Row row = sheet.getRow(j);
+                if (row == null||row.getRowNum() == 0) continue; // 跳过标题行
+                ImportDTO dto = new ImportDTO();
+                if (row.getCell(2) == null) continue;
+                String headSerial = row.getCell(2).getStringCellValue();
+                dto.setHeadSerial(headSerial);
+                if(row.getCell(0) == null) {
+                    dto.setPurchasDateContrast(null);
+                }else {
+                    if (row.getCell(0).getCellType() == CellType.NUMERIC) {
+                        row.getCell(0).setCellType(CellType.STRING);
+                    }
+                    dto.setPurchasDateContrast(row.getCell(0).getStringCellValue());
+                }
 
-            ImportDTO dto = new ImportDTO();
-            if (row.getCell(0).getCellType() == CellType.NUMERIC) {
-                row.getCell(0).setCellType(CellType.STRING);
-            }
-            String purchaseContract = row.getCell(0).getStringCellValue();
-            Matcher matcher = Pattern.compile("\\d+").matcher(purchaseContract);
-            int matcher_start = 0;
-            if (matcher.find(matcher_start)) {
-                LocalDate purchaseDate = LocalDateParseUtil.parseDate(matcher.group(0));
 
-                // 提取数字
-                dto.setPurchaseDate(purchaseDate);
-                matcher_start = matcher.end();
-            }
-            if (matcher.find(matcher_start)) {
-                String contractNumber = matcher.group(0);
-                dto.setContractNumber(contractNumber);
-            }
-            dto.setHeadModel(row.getCell(1).getStringCellValue());
-            String headSerial = row.getCell(2).getStringCellValue();
-            dto.setHeadSerial(headSerial);
-            dto.setShippingDate(LocalDateParseUtil.parseDate(row.getCell(3).getStringCellValue()));
-            dto.setWarehouseDate(LocalDateParseUtil.parseDate(row.getCell(4).getStringCellValue()));
-            dto.setVoltage((float) row.getCell(10).getNumericCellValue());
-            dto.setJetsout((int) row.getCell(11).getNumericCellValue());
-            if (headSerial != "") {
-                list.add(dto);
+
+                if(row.getCell(1) == null) {
+                    dto.setHeadModel(null);
+                }else {
+                    if (row.getCell(1).getCellType() == CellType.NUMERIC) {
+                        row.getCell(1).setCellType(CellType.STRING);
+                    }
+                    dto.setHeadModel(row.getCell(1).getStringCellValue());
+                }
+                if(row.getCell(3) == null) {
+                    dto.setWarehouseDate(null);
+                }else {
+                    if (row.getCell(3).getCellType() == CellType.NUMERIC) {
+                        row.getCell(3).setCellType(CellType.STRING);
+                    }
+                    dto.setWarehouseDate(LocalDateParseUtil.parseDate(row.getCell(3).getStringCellValue()));
+                }
+
+                if (headSerial != "") {
+                    list.add(dto);
+                }
             }
         }
         return list;

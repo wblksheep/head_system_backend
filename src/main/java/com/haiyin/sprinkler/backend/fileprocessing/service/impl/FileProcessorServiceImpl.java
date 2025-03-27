@@ -82,13 +82,22 @@ public class FileProcessorServiceImpl implements FileProcessorService {
     }
 
     private List<?> handleDamage(MultipartFile file) throws IOException {
+//        String sceneType = SceneType.DAMAGE.name();
+//        List<DamageDTO> dtos = excelParser.parseByStream(file, sceneType);
+//        // 2. 并行流加速转换
+//        List<SprinklerDAO> daos = dtos.parallelStream()
+//                .map(dto -> (SprinklerDAO) daoConverter.parseByStream(sceneType).convert(dto))
+//                .toList();
+//        List<Long> daoIds = sprinklerSaver.batchUpsert(daos, sceneType);
+//        stateMachine.batchRequestTransition(daoIds, 3);
+//        return dtos;
         String sceneType = SceneType.DAMAGE.name();
-        List<DamageDTO> dtos = excelParser.parseByStream(file, sceneType);
+        List<DamageDTO> dtos = excelParser.parseByStream(file, "damageimport");
         // 2. 并行流加速转换
         List<SprinklerDAO> daos = dtos.parallelStream()
                 .map(dto -> (SprinklerDAO) daoConverter.parseByStream(sceneType).convert(dto))
                 .toList();
-        List<Long> daoIds = sprinklerSaver.batchUpsert(daos, sceneType);
+        List<Long> daoIds = sprinklerSaver.batchUpsert(daos, "damageimport");
         stateMachine.batchRequestTransition(daoIds, 3);
         return dtos;
     }

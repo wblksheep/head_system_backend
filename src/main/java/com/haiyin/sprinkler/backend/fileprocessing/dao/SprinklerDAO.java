@@ -19,11 +19,7 @@ public class SprinklerDAO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // 自增主键
 
-    private LocalDate shippingDate;//发货日期
-
-    private LocalDate purchaseDate; // 购入日期
-
-    private String contractNumber; // 合同编号
+    private String purchaseDateContrast; // 购入日期
 
     private String headModel; // 喷头型号
 
@@ -67,24 +63,13 @@ public class SprinklerDAO {
     public SprinklerDAO() {
     }
 
-    protected boolean canEqual(final Object other) {
-        return other instanceof SprinklerDAO;
-    }
 
     public Long getId() {
         return this.id;
     }
 
-    public LocalDate getShippingDate() {
-        return this.shippingDate;
-    }
-
-    public LocalDate getPurchaseDate() {
-        return this.purchaseDate;
-    }
-
-    public String getContractNumber() {
-        return this.contractNumber;
+    public String getPurchaseDateContrast() {
+        return this.purchaseDateContrast;
     }
 
     public String getHeadModel() {
@@ -175,16 +160,8 @@ public class SprinklerDAO {
         this.id = id;
     }
 
-    public void setShippingDate(LocalDate shippingDate) {
-        this.shippingDate = shippingDate;
-    }
-
-    public void setPurchaseDate(LocalDate purchaseDate) {
-        this.purchaseDate = purchaseDate;
-    }
-
-    public void setContractNumber(String contractNumber) {
-        this.contractNumber = contractNumber;
+    public void setPurchaseDateContrast(String purchaseDateContrast) {
+        this.purchaseDateContrast = purchaseDateContrast;
     }
 
     public void setHeadModel(String headModel) {
@@ -279,17 +256,9 @@ public class SprinklerDAO {
         final Object this$id = this.getId();
         final Object other$id = other.getId();
         if (this$id == null ? other$id != null : !this$id.equals(other$id)) return false;
-        final Object this$shippingDate = this.getShippingDate();
-        final Object other$shippingDate = other.getShippingDate();
-        if (this$shippingDate == null ? other$shippingDate != null : !this$shippingDate.equals(other$shippingDate))
-            return false;
-        final Object this$purchaseDate = this.getPurchaseDate();
-        final Object other$purchaseDate = other.getPurchaseDate();
-        if (this$purchaseDate == null ? other$purchaseDate != null : !this$purchaseDate.equals(other$purchaseDate))
-            return false;
-        final Object this$contractNumber = this.getContractNumber();
-        final Object other$contractNumber = other.getContractNumber();
-        if (this$contractNumber == null ? other$contractNumber != null : !this$contractNumber.equals(other$contractNumber))
+        final Object this$purchaseDateContrast = this.getPurchaseDateContrast();
+        final Object other$purchaseDateContrast = other.getPurchaseDateContrast();
+        if (this$purchaseDateContrast == null ? other$purchaseDateContrast != null : !this$purchaseDateContrast.equals(other$purchaseDateContrast))
             return false;
         final Object this$headModel = this.getHeadModel();
         final Object other$headModel = other.getHeadModel();
@@ -365,17 +334,17 @@ public class SprinklerDAO {
         return true;
     }
 
+    protected boolean canEqual(final Object other) {
+        return other instanceof SprinklerDAO;
+    }
+
     public int hashCode() {
         final int PRIME = 59;
         int result = 1;
         final Object $id = this.getId();
         result = result * PRIME + ($id == null ? 43 : $id.hashCode());
-        final Object $shippingDate = this.getShippingDate();
-        result = result * PRIME + ($shippingDate == null ? 43 : $shippingDate.hashCode());
-        final Object $purchaseDate = this.getPurchaseDate();
-        result = result * PRIME + ($purchaseDate == null ? 43 : $purchaseDate.hashCode());
-        final Object $contractNumber = this.getContractNumber();
-        result = result * PRIME + ($contractNumber == null ? 43 : $contractNumber.hashCode());
+        final Object $purchaseDateContrast = this.getPurchaseDateContrast();
+        result = result * PRIME + ($purchaseDateContrast == null ? 43 : $purchaseDateContrast.hashCode());
         final Object $headModel = this.getHeadModel();
         result = result * PRIME + ($headModel == null ? 43 : $headModel.hashCode());
         final Object $headSerial = this.getHeadSerial();
@@ -422,6 +391,6 @@ public class SprinklerDAO {
     }
 
     public String toString() {
-        return "SprinklerDAO(id=" + this.getId() + ", shippingDate=" + this.getShippingDate() + ", purchaseDate=" + this.getPurchaseDate() + ", contractNumber=" + this.getContractNumber() + ", headModel=" + this.getHeadModel() + ", headSerial=" + this.getHeadSerial() + ", warehouseDate=" + this.getWarehouseDate() + ", voltage=" + this.getVoltage() + ", jetsout=" + this.getJetsout() + ", usageDate=" + this.getUsageDate() + ", user=" + this.getUser() + ", usagePurpose=" + this.getUsagePurpose() + ", headHistory=" + this.getHeadHistory() + ", color=" + this.getColor() + ", position=" + this.getPosition() + ", damageDate=" + this.getDamageDate() + ", note=" + this.getNote() + ", damageType=" + this.getDamageType() + ", realType=" + this.getRealType() + ", rmaDate=" + this.getRmaDate() + ", customer=" + this.getCustomer() + ", rmaLocation=" + this.getRmaLocation() + ", status=" + this.getStatus() + ", version=" + this.getVersion() + ", updateTime=" + this.getUpdateTime() + ")";
+        return "SprinklerDAO(id=" + this.getId() + ", purchaseDateContrast=" + this.getPurchaseDateContrast() + ", headModel=" + this.getHeadModel() + ", headSerial=" + this.getHeadSerial() + ", warehouseDate=" + this.getWarehouseDate() + ", voltage=" + this.getVoltage() + ", jetsout=" + this.getJetsout() + ", usageDate=" + this.getUsageDate() + ", user=" + this.getUser() + ", usagePurpose=" + this.getUsagePurpose() + ", headHistory=" + this.getHeadHistory() + ", color=" + this.getColor() + ", position=" + this.getPosition() + ", damageDate=" + this.getDamageDate() + ", note=" + this.getNote() + ", damageType=" + this.getDamageType() + ", realType=" + this.getRealType() + ", rmaDate=" + this.getRmaDate() + ", customer=" + this.getCustomer() + ", rmaLocation=" + this.getRmaLocation() + ", status=" + this.getStatus() + ", version=" + this.getVersion() + ", updateTime=" + this.getUpdateTime() + ")";
     }
 }
